@@ -179,10 +179,12 @@ ansible --version
 
 
 ##### 3. Создаем файл hosts.ini c использованием FQDN имен серверов 
+
 ![alt text](Png/1006.png)
 
 
 ##### 4. Проверяем доступность ВМ используя модуль ping
+
 ![alt text](Png/1007.png)
 
 
@@ -195,9 +197,11 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml
 
 
 Проверяем доступность сайта в браузере по публичному ip адресу Load Balancer
+
 ![alt text](Png/1009.png)
 
-Делаем запрос curl -v 
+Делаем запрос `curl -v` 
+
 ![alt text](Png/1010.png)
 
 
@@ -213,10 +217,12 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix.yml
 
 
 Проверяем что zabbix сервер доступнен 
+
 ![alt text](Png/1012.png)
 
 
 Устанавливаем Zabbix агентов на web сервера
+
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml 
  ```
@@ -256,12 +262,13 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml
 ![alt text](Png/1022.png)
 
 ##### Проверяем в Kibana что Filebeat доставляет логи в Elasticsearch
+
 ![alt text](Png/1023.png)
 ![alt text](Png/1024.png)
 
 
 
-##### Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
-##### Балансировщик доступен по адресу (http://158.160.193.38)
-##### Kibana  (http://89.169.179.61:5601/app/home#/)
-##### Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
+#####  [Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix](http://89.169.160.155/zabbix/)
+#####  [Балансировщик доступен по адресу](http://158.160.193.38)
+#####  [Kibana](http://89.169.179.61:5601/app/home#/)
+##### [Посмотреть логи можно тут](http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
