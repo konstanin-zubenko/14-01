@@ -118,7 +118,7 @@ provider "yandex" {
   service_account_key_file = file("~/.authorized_key.json")
 }
  ```
-4. Создаем файл c доступом к облакe, сервесный аккаунт Yandex Cloud  
+4. Создаем файл c доступом к облаку, сервесный аккаунт Yandex Cloud  
 ```
 #cloud-config
 users:
