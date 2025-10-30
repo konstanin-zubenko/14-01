@@ -55,23 +55,14 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 ### Terraform
 
-### Инфраструктура
-1. Cкачивание Terraform
-2. Распаковываем архив
-3. Выдаем права на запуск
 ```
-chmod 766 terraform
- ```
-5. Проверяем работоспособность
+1. Проверяем установку Terraform: 
 ```
-./terraform -v
+terraform -v
  ```
-6. Создание файла конфигурации и выдача прав 
-```
-nano ~/.terraformrc
-chmod 644 .terraformrc
- ```
-7. Вносим данные, указанные в документации
+![alt text](Png/1000.png)
+
+2. Вносим данные, указанные в документации 
 ```
 provider_installation {
   network_mirror {
@@ -83,150 +74,165 @@ provider_installation {
   }
 }
  ```
-8. В папке, в которой будет запускаться Terraform, создаем файл main.tf с следующим содежанием
+3. В папке, в которой будет запускаться Terraform, создаем файл providers.tf с следующим содежанием
 ```
 terraform {
   required_providers {
     yandex = {
-      source = "yandex-cloud/yandex"
+      source  = "yandex-cloud/yandex"
+      version = "0.141.0"
     }
   }
-  required_version = ">= 0.13"
+
+  required_version = ">=1.8.4"
 }
 
 provider "yandex" {
-  token = "токен"
-  cloud_id  = "id облака"
-  folder_id = "id папки"
+  # token                    = "do not use!!!"
+  cloud_id                 = var.cloud_id
+  folder_id                = var.folder_id
+  zone = "ru-central1-b"
+  service_account_key_file = file("~/.authorized_key.json")
 }
  ```
-9. Создать файл meta.yaml
+4. Создаем файл c доступом к облак, сервесный аккаунт Yandex Cloud  meta.txt
 ```
+#cloud-config
 users:
   - name: user
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
-      - ssh-rsa ***
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINPbjPskICzIXWViRi5TXaCtjVDYYr1CZ7puymMG0wxI cozu@cozu-VirtualBox
  ```
-10. Инициализация Terraform
+5. Инициализация Terraform
 ```
-./terraform init
+terraform init
  ```
 
 # Развёртка Terraform
-Подготовка .tf конфигов, после начинаем развертку из папки Terraform.
+Подготавливаем файлы .tf переменных, инфраструктуры.
 
-Запуск развертки
+Запускаем развертку инфраструктуры в Yandex Cloud
 ```
-./terraform apply
+terraform apply
  ```
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%200.5.png)
+![alt text](Png/1001.png)
 
-Проверка результата в Yandex Cloud:
+Проверяем созданную инфраструктуру в Yandex Cloud:
 
-1. Одна сеть bastion-network
-2. Две подсети bastion-internal-segment и bastion-external-segment
-3. Балансировщик alb-lb с роутером web-servers-router
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%202.png)
+![alt text](Png/1002.png)
+![alt text](Png/1003.png)
+![alt text](Png/1004.png)
 
-6 виртуальных машин
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%202.png)
+И расписание снимков 
 
-6 групп безопасности
+![alt text](Png/1005.png)
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%203.png) 
-
-Ежедневные снимки дисков по расписанию
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%205.png)
-
+Инфрасруктура развернута, переходим к настройке виртуальных машин
 
 # Ansible
 
-Установка и настройка ansible
+1. Проверяем установку Ansible 
+```
+ansible --version
+ ```
+![alt text](Png/1024.png)
 
-устанавливаем ansible на локальном хосте где работали с terraform и настраиваем его на работу через bastion
+Настраиваем ansible на работу через bastion
 
 файл конфигурации
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%206.png)
+![alt text](Png/1006.png)
 
-создаем файл hosts.ini c использованием FQDN имен серверов вместо ip
+Создаем файл hosts.ini c использованием FQDN имен серверов 
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%207.png)
+![alt text](Png/1007.png)
 
-проверяем доступность ВМ используя модуль ping
+Проверяем доступность ВМ используя модуль ping
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/пинг.png)
+![alt text](Png/1008.png)
 
-# Установка NGINX и загрузка сайта
+# Устанавливаем NGINX и загружаем сайт
 
-ставим nginx
+```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml 
+ ```
 
-запускаем playbook установки Nginx с созданием web страницы
+![alt text](Png/1009.png)
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%208.png)
+Проверяем доступность сайта в браузере по публичному ip адресу Load Balancer
 
-проверяем доступность сайта в браузере по публичному ip адресу Load Balancer
+![alt text](Png/1010.png)
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%209.png)
+Делаем запрос curl -v 
 
-делаем запрос curl -v 
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2010.png)
+![alt text](Png/1011.png)
 
 # Мониторинг
 
-установка Zabbix сервера
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png11.png)
+Устанавливаем Zabbix сервер
+ ```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix.yml
+ ```
+![alt text](Png/1012.png)
 
-Проверка доступности frontend zabbix сервера
+Проверяем что zabbix сервер доступнен 
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2012.png)
+![alt text](Png/1013.png)
 
-установка Zabbix агентов на web сервера
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2013.png)
+Устанавливаем Zabbix агентов на web сервера
+ ```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml 
+ ```
+![alt text](Png/1014.png)
 
 Добавляем хосты используя FQDN имена в zabbix сервер и настраиваем дашборды
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2014.png)
+![alt text](Png/1014.png)
+![alt text](Png/1015.png)
+![alt text](Png/1016.png)
+![alt text](Png/1017.png)
+![alt text](Png/1018.png)
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2015.png)
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2016.png)
+# Устанавлиеваем стек ELK для сбора логов
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2017.png)
+Установливаем  Elasticsearch
+ ```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini elastic.yml 
+ ```
+![alt text](Png/1019.png)
 
-# Установка стека ELK для сбора логов
-
-Установка Elasticsearch
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2018.png)
-
-# Установка Kibana
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2019.png)
+# Устанавливаем Kibana
+ ```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini kibana.yml 
+ ```
+![alt text](Png/1020.png)
 
 проверяем что Kibana работает
 
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2020.png)
+![alt text](Png/1021.png)
 
-
-# Установка Filebeat
-
-Устанавливаем Filebeat на web сервера
-
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2021.png)
+# Устанавливаем Filebeat на web сервера
+```
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml 
+```
+![alt text](Png/1022.png)
 
 Проверяем в Kibana что Filebeat доставляет логи в Elasticsearch
-![alt text](https://github.com/Daark46/-Diploma1/blob/main/Png/png%2022.png)
+![alt text](Png/1023.png)
+![alt text](Png/1024.png)
 
 # Балансировщик [Балансировщик](http://84.252.132.245/)
 # Zabbix [Логин: Almin Пароль: zabbix](http://158.160.81.219/zabbix/)
 # Kibana [Kibana](http://158.160.66.160:5601/app/home#/)
+
+Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
+Балансировщик доступен по адресу (http://158.160.193.38)
+Kibana  (http://89.169.179.61:5601/app/home#/)
+Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
