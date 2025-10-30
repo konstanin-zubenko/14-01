@@ -59,7 +59,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ```
 terraform -v
  ```
-![alt text](https://github.com/konstanin-zubenko/14-01/png/1000.png)
+![alt text](https://github.com/konstanin-zubenko/14-01/Png/1000.png)
 
 
 2. Вносим данные, указанные в документации 
