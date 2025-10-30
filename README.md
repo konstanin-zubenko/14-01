@@ -86,8 +86,8 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 
 #####  2. Вносим данные, указанные в документации 
-```
-provider_installation {
+
+`provider_installation {
   network_mirror {
     url = "https://terraform-mirror.yandexcloud.net/"
     include = ["registry.terraform.io/*/*"]
@@ -95,8 +95,8 @@ provider_installation {
   direct {
     exclude = ["registry.terraform.io/*/*"]
   }
-}
- ```
+}`
+
 ##### 3. В папке, в которой будет запускаться Terraform, создаем файл providers.tf с следующим содежанием
 ```
 terraform {
