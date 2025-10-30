@@ -55,7 +55,6 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 ### Terraform
 
-```
 1. Проверяем установку Terraform: 
 ```
 terraform -v
