@@ -151,9 +151,12 @@ terraform apply
 
 
 ![alt text](Png/1002.png)
+
 ![alt text](Png/1003.png)
 
+
 Расписание снимков 
+
 ![alt text](Png/1004.png)
 
 
