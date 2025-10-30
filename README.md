@@ -235,8 +235,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml
 
 ![alt text](Png/1015.png)
 ![alt text](Png/1016.png)
-![alt text](Png/1017.png)
-![alt text](Png/1018.png)
+
 
 
 ### Устанавлиеваем стек ELK для сбора логов
@@ -245,26 +244,32 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini elastic.yml 
  ```
-![alt text](Png/1019.png)
+![alt text](Png/1017.png)
+
 
 #####  Устанавливаем Kibana
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini kibana.yml 
  ```
-![alt text](Png/1020.png)
+![alt text](Png/1018.png)
+
+
 
 Проверяем, что Kibana работает
+![alt text](Png/1019.png)
 
-![alt text](Png/1021.png)
 
 ##### Устанавливаем Filebeat на web сервера
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml 
 ```
-![alt text](Png/1022.png)
+![alt text](Png/1020.png)
+
 
 ##### Проверяем в Kibana что Filebeat доставляет логи в Elasticsearch
 
+![alt text](Png/1021.png)
+![alt text](Png/1022.png)
 ![alt text](Png/1023.png)
 ![alt text](Png/1024.png)
 
