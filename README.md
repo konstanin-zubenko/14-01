@@ -79,9 +79,9 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ### Terraform
 
 #####  1. Проверяем установку Terraform: 
-```
-terraform -v
- ```
+
+`terraform -v`
+
 ![alt text](Png/1000.png)
 
 
@@ -148,12 +148,10 @@ terraform apply
 
 ![alt text](Png/1002.png)
 ![alt text](Png/1003.png)
+
+Расписание снимков 
 ![alt text](Png/1004.png)
 
-
- расписание снимков 
-
-![alt text](Png/1005.png)
 
 Инфрасруктура развернута, переходим к настройке виртуальных машин
 
@@ -168,6 +166,8 @@ ansible --version
 ##### 2. Настраиваем ansible на работу через bastion
 
 файл конфигурации
+
+![alt text](Png/1005.png)
 
 
 
