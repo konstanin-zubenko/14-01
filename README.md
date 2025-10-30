@@ -78,14 +78,14 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 ### Terraform
 
-1. Проверяем установку Terraform: 
+#####  1. Проверяем установку Terraform: 
 ```
 terraform -v
  ```
 ![alt text](Png/1000.png)
 
 
-2. Вносим данные, указанные в документации 
+#####  2. Вносим данные, указанные в документации 
 ```
 provider_installation {
   network_mirror {
@@ -97,7 +97,7 @@ provider_installation {
   }
 }
  ```
-3. В папке, в которой будет запускаться Terraform, создаем файл providers.tf с следующим содежанием
+##### 3. В папке, в которой будет запускаться Terraform, создаем файл providers.tf с следующим содежанием
 ```
 terraform {
   required_providers {
@@ -118,7 +118,7 @@ provider "yandex" {
   service_account_key_file = file("~/.authorized_key.json")
 }
  ```
-4. Создаем файл c доступом к облаку, сервесный аккаунт Yandex Cloud  
+##### 4. Создаем файл c доступом к облаку, сервесный аккаунт Yandex Cloud  
 ```
 #cloud-config
 users:
@@ -129,7 +129,7 @@ users:
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINPbjPskICzIXWViRi5TXaCtjVDYYr1CZ7puymMG0wxI cozu@cozu-VirtualBox
  ```
-5. Инициализация Terraform
+##### 5. Инициализация Terraform
 ```
 terraform init
  ```
@@ -151,7 +151,7 @@ terraform apply
 ![alt text](Png/1004.png)
 
 
-И расписание снимков 
+ расписание снимков 
 
 ![alt text](Png/1005.png)
 
@@ -159,41 +159,41 @@ terraform apply
 
 ### Ansible
 
-1. Проверяем установку Ansible 
+##### 1. Проверяем установку Ansible 
 ```
 ansible --version
  ```
 ![alt text](Png/1024.png)
 
-Настраиваем ansible на работу через bastion
+##### 2. Настраиваем ansible на работу через bastion
 
 файл конфигурации
 
+
+
+##### 3. Создаем файл hosts.ini c использованием FQDN имен серверов 
 ![alt text](Png/1006.png)
 
-Создаем файл hosts.ini c использованием FQDN имен серверов 
 
+##### 4. Проверяем доступность ВМ используя модуль ping
 ![alt text](Png/1007.png)
 
-Проверяем доступность ВМ используя модуль ping
-
-![alt text](Png/1008.png)
 
 ### Устанавливаем NGINX и загружаем сайт
 
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml 
  ```
+![alt text](Png/1008.png)
 
-![alt text](Png/1009.png)
 
 Проверяем доступность сайта в браузере по публичному ip адресу Load Balancer
-
-![alt text](Png/1010.png)
+![alt text](Png/1009.png)
 
 Делаем запрос curl -v 
+![alt text](Png/1010.png)
 
-![alt text](Png/1011.png)
+
 
 ### Мониторинг
 
@@ -202,17 +202,18 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix.yml
  ```
-![alt text](Png/1012.png)
+![alt text](Png/1011.png)
+
 
 Проверяем что zabbix сервер доступнен 
+![alt text](Png/1012.png)
 
-![alt text](Png/1013.png)
 
 Устанавливаем Zabbix агентов на web сервера
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml 
  ```
-![alt text](Png/1014.png)
+![alt text](Png/1013.png)
 
 Добавляем хосты используя FQDN имена в zabbix сервер и настраиваем дашборды
 
