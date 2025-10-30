@@ -275,7 +275,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml
 
 
 
- [Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix](http://89.169.160.155/zabbix/)
- [Балансировщик доступен по адресу](http://158.160.193.38)
- [Kibana](http://89.169.179.61:5601/app/home#/)
- [Посмотреть логи можно тут](http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
+ * [Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix](http://89.169.160.155/zabbix/)
+ * [Балансировщик доступен по адресу](http://158.160.193.38)
+ * [Kibana](http://89.169.179.61:5601/app/home#/)
+ * [Посмотреть логи можно тут](http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
