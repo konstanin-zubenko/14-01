@@ -271,7 +271,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml
 ![alt text](Png/1021.png)
 ![alt text](Png/1022.png)
 ![alt text](Png/1023.png)
-![alt text](Png/1024.png)
+
 
 
 
