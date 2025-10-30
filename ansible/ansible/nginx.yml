@@ -1,5 +1,5 @@
 ---
-- name: Установка Nginx и настройка странички
+- name: Установка Nginx и настройка страницы
   hosts: web
   become: yes
 
@@ -17,9 +17,9 @@
         state: started
         enabled: yes
     
-    - name: Создание HTML-странички
+    - name: Создание HTML-страницы
       copy:
-        content: "<html><head><title>Netology diplom DruzhininDA</title></head><body><h1>Netology diplom DruzhininDA</h1></body></html>"
+        content: "<html><head><title>Netology diplom cozu</title></head><body><h1>Netology diplom cozu</h1></body></html>"
         dest: /var/www/html/index.html
         owner: www-data
         group: www-data

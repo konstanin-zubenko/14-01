@@ -12,7 +12,7 @@
 
   - name: Копируем конфигурационный файл kibana
     template:
-      src: /home/danil21/ansible/kibana.j2
+      src: /home/cozu/projects/14-01/ansible/ansible/kibana.j2
       dest: /etc/kibana/kibana.yml
 
   - name: daemon_reload

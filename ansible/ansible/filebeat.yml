@@ -13,7 +13,7 @@
 
   - name: Копируем конфиг filebeat
     template:
-      src: /home/danil21/ansible/filebeat.j2
+      src: /home/cozu/projects/14-01/ansible/ansible/filebeat.j2
       dest: /etc/filebeat/filebeat.yml
 
   - name: daemon_reload
