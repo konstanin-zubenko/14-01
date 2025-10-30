@@ -134,7 +134,7 @@ users:
 terraform init
  ```
 
-# Развёртка Terraform
+### Развёртка Terraform
 Подготавливаем файлы .tf переменных, инфраструктуры.
 
 Запускаем развертку инфраструктуры в Yandex Cloud
@@ -157,7 +157,7 @@ terraform apply
 
 Инфрасруктура развернута, переходим к настройке виртуальных машин
 
-# Ansible
+### Ansible
 
 1. Проверяем установку Ansible 
 ```
@@ -179,7 +179,7 @@ ansible --version
 
 ![alt text](Png/1008.png)
 
-# Устанавливаем NGINX и загружаем сайт
+### Устанавливаем NGINX и загружаем сайт
 
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml 
@@ -195,7 +195,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini nginx.yml
 
 ![alt text](Png/1011.png)
 
-# Мониторинг
+### Мониторинг
 
 
 Устанавливаем Zabbix сервер
@@ -223,7 +223,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml
 ![alt text](Png/1018.png)
 
 
-# Устанавлиеваем стек ELK для сбора логов
+### Устанавлиеваем стек ELK для сбора логов
 
 Установливаем  Elasticsearch
  ```
@@ -231,7 +231,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini elastic.yml
  ```
 ![alt text](Png/1019.png)
 
-# Устанавливаем Kibana
+### Устанавливаем Kibana
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini kibana.yml 
  ```
@@ -241,7 +241,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini kibana.yml
 
 ![alt text](Png/1021.png)
 
-# Устанавливаем Filebeat на web сервера
+###Устанавливаем Filebeat на web сервера
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml 
 ```
@@ -251,11 +251,9 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml
 ![alt text](Png/1023.png)
 ![alt text](Png/1024.png)
 
-# Балансировщик [Балансировщик](http://84.252.132.245/)
-# Zabbix [Логин: Almin Пароль: zabbix](http://158.160.81.219/zabbix/)
-# Kibana [Kibana](http://158.160.66.160:5601/app/home#/)
 
-Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
-Балансировщик доступен по адресу (http://158.160.193.38)
-Kibana  (http://89.169.179.61:5601/app/home#/)
-Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
+
+#### Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
+#### Балансировщик доступен по адресу (http://158.160.193.38)
+#### Kibana  (http://89.169.179.61:5601/app/home#/)
+#### Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
