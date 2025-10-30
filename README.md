@@ -80,7 +80,9 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 #####  1. Проверяем установку Terraform: 
 
-`terraform -v`
+```
+terraform -v
+```
 
 ![alt text](Png/1000.png)
 
