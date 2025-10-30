@@ -226,35 +226,35 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml
 
 ### Устанавлиеваем стек ELK для сбора логов
 
-Установливаем  Elasticsearch
+#####  Установливаем  Elasticsearch
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini elastic.yml 
  ```
 ![alt text](Png/1019.png)
 
-### Устанавливаем Kibana
+#####  Устанавливаем Kibana
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini kibana.yml 
  ```
 ![alt text](Png/1020.png)
 
-проверяем что Kibana работает
+Проверяем, что Kibana работает
 
 ![alt text](Png/1021.png)
 
-###Устанавливаем Filebeat на web сервера
+##### Устанавливаем Filebeat на web сервера
 ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini filebeat.yml 
 ```
 ![alt text](Png/1022.png)
 
-Проверяем в Kibana что Filebeat доставляет логи в Elasticsearch
+##### Проверяем в Kibana что Filebeat доставляет логи в Elasticsearch
 ![alt text](Png/1023.png)
 ![alt text](Png/1024.png)
 
 
 
-#### Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
-#### Балансировщик доступен по адресу (http://158.160.193.38)
-#### Kibana  (http://89.169.179.61:5601/app/home#/)
-#### Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
+##### Интерфейс Zabbix готов. Имя пользователя по умолчанию — Admin , пароль — zabbix (http://89.169.160.155/zabbix/)
+##### Балансировщик доступен по адресу (http://158.160.193.38)
+##### Kibana  (http://89.169.179.61:5601/app/home#/)
+##### Посмотреть логи можно тут (http://89.169.179.61:5601/app/discover#/?_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!f,value:10000),time:(from:now-15m,to:now))&_a=(columns:!(),filters:!(),index:'9719e900-b5ae-11f0-9ca3-9983c7451ba0',interval:auto,query:(language:kuery,query:''),sort:!()))
