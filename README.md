@@ -219,18 +219,18 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix.yml
 Проверяем что zabbix сервер доступнен 
 
 ![alt text](Png/1012.png)
-
+![alt text](Png/1013.png)
 
 Устанавливаем Zabbix агентов на web сервера
 
+![alt text](Png/1014.png)
  ```
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./hosts.ini zabbix_agent.yml 
  ```
-![alt text](Png/1013.png)
+
 
 Добавляем хосты используя FQDN имена в zabbix сервер и настраиваем дашборды
 
-![alt text](Png/1014.png)
 ![alt text](Png/1015.png)
 ![alt text](Png/1016.png)
 ![alt text](Png/1017.png)
